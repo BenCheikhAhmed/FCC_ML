@@ -1,9 +1,19 @@
+# import the necessary libraries
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
+# StandardScaler: to scale the data
 from sklearn.preprocessing import StandardScaler
+# RandomOverSampler: to oversample the data
 from imblearn.over_sampling import RandomOverSampler
+
+# KNeighborsClassifier: to train a KNN model
 from sklearn.neighbors import KNeighborsClassifier
+# GaussianNB: to train a Naive Bayes model
+from sklearn.naive_bayes import GaussianNB
+
+# classification_report: to evaluate the model
 from sklearn.metrics import classification_report
 
 # define the columns of the data
@@ -67,4 +77,14 @@ knn_model.fit(X_train, y_train)
 # evaluate the model
 # predict the validation set
 y_pred = knn_model.predict(X_test)
+print(classification_report(y_test, y_pred))
+
+# Naive Bayes Implementation
+# train a Naive Bayes model
+nb_model = GaussianNB()
+nb_model.fit(X_train, y_train)
+
+# evaluate the model
+# predict the validation set
+y_pred = nb_model.predict(X_test)
 print(classification_report(y_test, y_pred))
