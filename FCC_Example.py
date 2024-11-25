@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from imblearn.over_sampling import RandomOverSampler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import classification_report
 
 # define the columns of the data
 cols = ['fLength', 'fWidth', 'fSize', 'fConc', 'fConc1', 'fAsym', 'fM3Long', 'fM3Trans', 'fAlpha', 'fDist', 'class']
@@ -23,7 +25,7 @@ for label in cols[:-1]:
     plt.ylabel("Probability")
     plt.xlabel(label)
     plt.legend()
-    plt.show()
+    #plt.show()
 
 # split the data into train, validation and test sets
 # 60% train, 20% validation, 20% test
@@ -55,3 +57,14 @@ train , X_train , y_train = scale_dataset(train , oversample=True)
 # do not oversample the validation and test sets
 valid , X_valid , y_valid = scale_dataset(valid , oversample=False)
 test , X_test , y_test = scale_dataset(test , oversample=False)
+
+# KNN Implementation
+# train a KNN model
+# use 5 neighbors
+knn_model = KNeighborsClassifier(n_neighbors=5)
+knn_model.fit(X_train, y_train)
+
+# evaluate the model
+# predict the validation set
+y_pred = knn_model.predict(X_test)
+print(classification_report(y_test, y_pred))
