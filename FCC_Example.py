@@ -12,6 +12,8 @@ from imblearn.over_sampling import RandomOverSampler
 from sklearn.neighbors import KNeighborsClassifier
 # GaussianNB: to train a Naive Bayes model
 from sklearn.naive_bayes import GaussianNB
+# LogisticRegression: to train a Logistic Regression model
+from sklearn.linear_model import LogisticRegression
 
 # classification_report: to evaluate the model
 from sklearn.metrics import classification_report
@@ -76,6 +78,7 @@ knn_model.fit(X_train, y_train)
 
 # evaluate the model
 # predict the validation set
+print("KNN")
 y_pred = knn_model.predict(X_test)
 print(classification_report(y_test, y_pred))
 
@@ -86,5 +89,16 @@ nb_model.fit(X_train, y_train)
 
 # evaluate the model
 # predict the validation set
+print("Naive Bayes")
 y_pred = nb_model.predict(X_test)
+print(classification_report(y_test, y_pred))
+
+# Logistic Regression Implementation
+lg_model = LogisticRegression()
+lg_model = lg_model.fit(X_train, y_train)
+
+# evaluate the model
+# predict the validation set
+print("Logistic Regression")
+y_pred = lg_model.predict(X_test)
 print(classification_report(y_test, y_pred))
