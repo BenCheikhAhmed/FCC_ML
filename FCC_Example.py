@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from keras import models
 
 # StandardScaler: to scale the data
 from sklearn.preprocessing import StandardScaler
@@ -14,6 +15,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 # LogisticRegression: to train a Logistic Regression model
 from sklearn.linear_model import LogisticRegression
+# SVC: to train a SVM model
+from sklearn.svm import SVC
 
 # classification_report: to evaluate the model
 from sklearn.metrics import classification_report
@@ -101,4 +104,14 @@ lg_model = lg_model.fit(X_train, y_train)
 # predict the validation set
 print("Logistic Regression")
 y_pred = lg_model.predict(X_test)
+print(classification_report(y_test, y_pred))
+
+# SVM Implementation
+svm_model = SVC()
+svm_model = svm_model.fit(X_train , y_train)
+
+# evaluate the model
+# predict the validation set
+print("SVM")
+y_pred = svm_model.predict(X_test)
 print(classification_report(y_test, y_pred))
